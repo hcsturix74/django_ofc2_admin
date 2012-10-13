@@ -15,7 +15,7 @@ Dependecies
 -----------
 
 * Open-Flash-Chart-2: http://teethgrinder.co.uk/open-flash-chart-2/
-* django-colors: guillaumeesquevin/django-colorse@84e8fe800
+* guillaumeesquevin/django-colors: guillaumeesquevin/django-colors@e84e8fe800
 
 
 
