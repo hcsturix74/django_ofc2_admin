@@ -1,0 +1,127 @@
+"{% spaceless %}
+<settings>
+  <data_type>XML</data_type>
+  <font>Tahoma</font>
+  <text_color>7F8DA9</text_color>
+  <hide_bullets_count>18</hide_bullets_count>
+  <background>
+    <alpha>90</alpha>
+    <border_alpha>0</border_alpha>
+  </background>
+
+  <column>
+    <width>50</width>
+    <spacing>0</spacing>
+    <grow_time>3</grow_time>
+    <sequenced_grow>true</sequenced_grow>
+  </column>
+
+  <plot_area>
+    <margins>
+      <left>54</left>
+      <top>2</top>
+      <right>2</right>
+      <bottom>40</bottom>
+    </margins>
+  </plot_area>
+
+  <grid>
+    <category>
+      <alpha>5</alpha>
+      <dashed>true</dashed>
+    </category>
+    <value>
+      <alpha>5</alpha>
+      <dashed>true</dashed>
+      <dash_length>5</dash_length>
+    </value>
+  </grid>
+
+  <values>
+    <category>
+      <frequency>1</frequency>
+      <rotate>30</rotate>
+      <text_size>10</text_size>
+    </category>
+    <value>
+      <min>0</min>
+      <skip_last>false</skip_last>
+    </value>
+  </values>
+
+  <axes>
+    <category>
+      <color>#7F8DA9</color>
+      <width>1</width>
+    </category>
+    <value>
+      <color>#7F8DA9</color>
+      <width>1</width>
+    </value>
+  </axes>
+
+  <legend>
+    <enabled>false</enabled>
+  </legend>
+
+  <labels>
+    <label>
+      <x>0</x>
+      <y>290</y>
+      <rotate>90</rotate>
+      <text><![CDATA[<b>Temperature anomaly, C (1950 - 2005)</b>]]></text>
+    </label>
+    <label>
+      <x>-120</x>
+      <y>350</y>
+      <align>right</align>
+      <text><![CDATA[Source: <a href='http://www.cru.uea.ac.uk/cru/info/warming/' target='_blank'><u>Climatic Research Unit</u></a>]]></text>
+    </label>
+  </labels>
+
+  <graphs>
+    <graph gid='0'>
+      <title>Anomaly</title>
+      <color>DB4C3C</color>
+      <balloon_text><![CDATA[Anomaly in {series}: {value}C]]></balloon_text>
+      {% comment %}<line_width>3</line_width>{% endcomment %}
+      <fill_alpha>40</fill_alpha>
+    </graph>
+    <graph gid='1'>
+      <type>line</type>
+      <color>AB1514</color>
+      <title>Smoothed</title>
+      {% comment %}<line_width>3</line_width>{% endcomment %}
+      <fill_alpha>30</fill_alpha>
+      <balloon_text><![CDATA[Anomaly in {series}: {value}C (Smoothed)]]></balloon_text>
+      {% comment %}<bullet>round</bullet>{% endcomment %}
+    </graph>
+    <graph gid='2'>
+      <type>line</type>
+      <color>111514</color>
+      <title>prova</title>
+      <line_width>3</line_width>
+      <fill_alpha>30</fill_alpha>
+      <balloon_text><![CDATA[Anomaly in {series}: {value}C (Smoothed)]]></balloon_text>
+      <bullet>round</bullet>
+    </graph>
+  </graphs>
+
+  <guides>
+    <guide>
+      <start_value>0</start_value>
+      <end_value>0.8</end_value>
+      <alpha>0</alpha>
+      <fill_color>#CC0000</fill_color>
+      <fill_alpha>10</fill_alpha>
+    </guide>
+    <guide>
+      <start_value>0</start_value>
+      <end_value>-0.4</end_value>
+      <alpha>0</alpha>
+      <fill_color>#0000CC</fill_color>
+      <fill_alpha>10</fill_alpha>
+    </guide>
+  </guides>
+</settings>
+{% endspaceless %}"
