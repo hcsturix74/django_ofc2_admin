@@ -181,22 +181,21 @@ class GraphTemplate(BaseGraphTemplate):
 
     title_text          = CharField(max_length=255, verbose_name = _('Title Text'), blank=True, null=True)
     title_style         = CharField(max_length=255, verbose_name = _('Title Style'), blank=True, null=True ,default = default_titlestyle,
-                                    help_text=_('Insert it in CSS stype (example: {font-size: 30px;background-color: #0000ff;}'))
-
-
+                                    help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
     x_legend_text       = CharField(max_length=255, verbose_name = _('X Legend Text'), blank=True, null=True)
-    x_legend_style      = CharField(max_length=255, verbose_name = _('X Legend Style'), blank=True, null=True, default = default_legend_style)
+    x_legend_style      = CharField(max_length=255, verbose_name = _('X Legend Style'), blank=True, null=True, default = default_legend_style,
+                                    help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
     y_legend_text       = CharField(max_length=255, verbose_name = _('Y Legend Text'), blank=True, null=True)
-    y_legend_style      = CharField(max_length=255, verbose_name = _('Y Legend Style'), blank=True, null=True, default = default_legend_style)
+    y_legend_style      = CharField(max_length=255, verbose_name = _('Y Legend Style'), blank=True, null=True, default = default_legend_style,
+                                    help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
     bg_colour           = ColorField(verbose_name = _('Background Colour'),default = 'eeeeee')
-
     x_axis_stroke       = IntegerField(validators=[MaxValueValidator(20)], verbose_name = _('X Axis Stroke'), blank=True, null=True,choices=SIZE_CHOICES)
     x_axis_tick_height  = IntegerField(validators=[MaxValueValidator(20)], verbose_name = _('X Axis Stroke Tick Height'), blank=True, null=True,choices=SIZE_CHOICES)
     x_axis_colour       = ColorField(verbose_name = _('X Axis Colour'), blank=True, null=True)
     x_axis_grid_colour  = ColorField(verbose_name = _('X Axis Grid Colour'), blank=True, null=True)
     x_axis_steps        = IntegerField(verbose_name = _('X Axis Steps'), blank=True, null=True)
-    x_axis_min          = IntegerField(verbose_name = _('X Axis Min'), blank=True, null=True)
-    x_axis_max          = IntegerField(verbose_name = _('X Axis Max'), blank=True, null=True)
+    x_axis_min          = IntegerField(verbose_name = _('X Axis Min'), blank=True, null=True, help_text=_('Insert min value'))
+    x_axis_max          = IntegerField(verbose_name = _('X Axis Max'), blank=True, null=True, help_text=_('Insert Max value'))
     x_axis_offset       = BooleanField(verbose_name = _('X Axis Offset'), default = True)
     x_axis_labels_labels= CharField(max_length=255, verbose_name = _('X Axis Labels'), blank=True, null=True)
     x_axis_labels_colour = ColorField(max_length=255, verbose_name = _('X Axis Labels Colour'), blank=True, null=True)
@@ -207,13 +206,13 @@ class GraphTemplate(BaseGraphTemplate):
     y_axis_grid_colour  = ColorField(max_length=255, verbose_name = _('Y Axis Grid Colour'), blank=True, null=True)
     y_axis_offset       = BooleanField(verbose_name = _('Y Axis Offset'), default = True)
     y_axis_steps        = IntegerField(verbose_name = _('Y Axis Steps'), blank=True, null=True)
-    y_axis_min          = IntegerField(verbose_name = _('Y Axis Min'), blank=True, null=True)
-    y_axis_max          = IntegerField(verbose_name = _('Y Axis Max'), blank=True, null=True)
+    y_axis_min          = IntegerField(verbose_name = _('Y Axis Min'), blank=True, null=True, help_text=_('Insert min value'))
+    y_axis_max          = IntegerField(verbose_name = _('Y Axis Max'), blank=True, null=True, help_text=_('Insert Max value'))
     y_axis_labels_labels= CharField(max_length=255, verbose_name = _('Y Axis Labels'), blank=True, null=True)
     y_axis_labels_colour= ColorField(max_length=255, verbose_name = _('Y Axis Labels Colour'), blank=True, null=True)
-    is_y_axis_right_available = BooleanField(verbose_name = _('Y Axis-Right Avaialble'), default = False)
-    y_axis_right_min    = IntegerField(verbose_name = _('Y Axis-Right Min'), blank=True, null=True)
-    y_axis_right_max    = IntegerField(verbose_name = _('Y Axis-Right Max'), blank=True, null=True)
+    is_y_axis_right_available = BooleanField(verbose_name = _('Y Axis-Right Available'), default = False)
+    y_axis_right_min    = IntegerField(verbose_name = _('Y Axis-Right Min'), blank=True, null=True, help_text=_('Insert min value'))
+    y_axis_right_max    = IntegerField(verbose_name = _('Y Axis-Right Max'), blank=True, null=True, help_text=_('Insert Max value'))
     y_axis_right_stroke = IntegerField(validators=[MaxValueValidator(20)], verbose_name = _('Y Axis-Right Stroke'), blank=True, null=True, choices=SIZE_CHOICES)
     y_axis_right_colour = ColorField(max_length=255, verbose_name = _('Y Axis-Right Colour'), blank=True, null=True)
     y_axis_right_steps  = IntegerField(verbose_name = _('Y Axis-Right Steps'), blank=True, null=True)
@@ -406,7 +405,7 @@ class GraphElementTemplate(BaseGraphTemplate):
     width              = PositiveSmallIntegerField(verbose_name = _('Width'))
     font_size          = PositiveSmallIntegerField(verbose_name = _('Font Size'))
     dot_size           = PositiveSmallIntegerField(verbose_name = _('Dot Size'))
-    tooltip            = CharField(max_length=100, verbose_name = _('Tooltip'), default= _('#val#'), help_text=_('Use some keywords like #val#, #total#. Example: #val# of #total#'))
+    tooltip            = CharField(max_length=100, verbose_name = _('Tooltip'), default= _('#val#'), help_text=_('Use some keywords like #val# Example: value:#val#'))
     inspection         = CharField(max_length=255, verbose_name = _('Ispect'),  choices=INSPECTION_DATE_CHOICES,default='self')
     graph_element_json = CharField(max_length=1024, verbose_name = _('Element JSON'), blank=True, null=True)
     values = []
