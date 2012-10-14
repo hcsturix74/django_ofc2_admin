@@ -1,0 +1,25 @@
+<style>
+    #chart_box {
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        
+        background-color: #333333;
+        padding: 8px;
+    }
+</style>
+<div id="graph_box">
+
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+        codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0"
+        width="{{ width }}" height="{{ height }}" id="chart" align="middle">
+    <param name="allowScriptAccess" value="sameDomain"/>
+    <param name="movie" value="{{ ofc_base_url_swf }}{{ ofc }}"/>
+    <param name="FlashVars" value="data-file={{ data_file }}&loading={{ loading_message }}"/>
+    <param name="quality" value="high"/>
+    <param name="bgcolor" value="#FFFFFF"/>
+    <param name="title" value="{{ object_id }}-{{ object_title }}"/>
+    <embed src="{{ ofc_base_url_swf }}{{ ofc }}" FlashVars="data-file={{ data_file }}&loading={{ loading_message }}" quality="high" bgcolor="#FFFFFF"
+           width={{ width }} height={{ height }} name="chart" align="middle" allowScriptAccess="sameDomain" 
+           type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"/>
+</object>
+</div>

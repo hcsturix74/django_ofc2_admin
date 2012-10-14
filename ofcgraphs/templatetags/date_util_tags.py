@@ -68,8 +68,8 @@ def render(self, context):
     else:
         start_format += " " + self.format['year']
         end_format += " " + self.format['year']
-    print start_format
-    print end_format
+#    print start_format
+#    print end_format
 
     return start_date.strftime(start_format) + " - " + end_date.strftime(end_format)
 
