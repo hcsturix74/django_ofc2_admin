@@ -101,6 +101,10 @@ class GraphTemplateAdmin(admin.ModelAdmin):
     save_as = True
 
 
+    class Media:
+        js = ('js/validatorhelper.js',)
+
+
     
 
 
