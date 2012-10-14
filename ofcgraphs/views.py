@@ -37,7 +37,7 @@ def get_graph_data(request, gobj_id):
     element_list = []
     for el in graph_template.graph_elements.all():
         #get values, here just random values
-        vlist = [randint(0,800) for r in range(0,100)]
+        vlist = [randint(0,800) for r in range(0,96)]
 
         #set element values using a list
         el.set_element_values(vlist)

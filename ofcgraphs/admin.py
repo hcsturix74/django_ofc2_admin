@@ -23,6 +23,7 @@ class GraphElementTemplateAdminInline(admin.StackedInline):
                         ('type', 'colour', 'width'),
                         ('font_size','dot_size',),
                         ('inspection','tooltip',),
+                        ('dot_style_type', 'dot_style_dot_size', 'dot_style_colour', 'dot_style_halo_size'),
                      )
         }),
 

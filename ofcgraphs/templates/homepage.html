@@ -9,6 +9,7 @@ Description: A two-column, fixed-width design with dark color scheme.
 Version    : 1.0
 Released   : 20120902
 {% load i18n %}
+{% load chartstags %}
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,14 +49,14 @@ Released   : 20120902
 				<div class="entry">
 					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
                         codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0"
-                         width="100%" height="400" id="chart" align="middle">
+                         width="100%" height="200" id="chart" align="middle">
                             <param name="allowScriptAccess" value="sameDomain"/>
                             <param name="movie" value="({{ STATIC_URL }}ofc2/open-flash-chart.swf"/>
-                            <param name="FlashVars" value="data-file=/graphs/1/&loading='cippa'"/>
+                            <param name="FlashVars" value="data-file=/graphs/4/&loading='Loading'"/>
                             <param name="quality" value="high"/>
                              <param name="bgcolor" value="#FFFFFF"/>
                              <embed src="{{ STATIC_URL }}ofc2/open-flash-chart.swf" FlashVars='data-file=/graphs/4/&loading="Loading..." ' quality="high" bgcolor="#FFFFFF"
-                             width=100% height=400 name="chart" align="middle" allowScriptAccess="sameDomain"
+                             width=100% height=200 name="chart" align="middle" allowScriptAccess="sameDomain"
                              type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
                     </object>
 				</div>
@@ -67,17 +68,17 @@ Released   : 20120902
 				<div class="entry">
 
                     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-                codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0"
-                width="100%" height="400" id="chart" align="middle">
-            <param name="allowScriptAccess" value="sameDomain"/>
-            <param name="movie" value="({{ STATIC_URL }}ofc2/open-flash-chart.swf"/>
-            <param name="FlashVars" value="data-file=/graphs/1/&loading='cippa'"/>
-            <param name="quality" value="high"/>
-            <param name="bgcolor" value="#FFFFFF"/>
-            <embed src="{{ STATIC_URL }}ofc2/open-flash-chart.swf" FlashVars='data-file=/graphs/2/&loading="Loading..." ' quality="high" bgcolor="#FFFFFF"
-                   width=100% height=400 name="chart" align="middle" allowScriptAccess="sameDomain"
-                   type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
-        </object>
+                        codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,115,0"
+                        width="100%" height="200" id="chart" align="middle">
+                            <param name="allowScriptAccess" value="sameDomain"/>
+                            <param name="movie" value="({{ STATIC_URL }}ofc2/open-flash-chart.swf"/>
+                            <param name="FlashVars" value="data-file=/graphs/2/&loading='Loading'"/>
+                            <param name="quality" value="high"/>
+                             <param name="bgcolor" value="#FFFFFF"/>
+                             <embed src="{{ STATIC_URL }}ofc2/open-flash-chart.swf" FlashVars='data-file=/graphs/2/&loading="Loading..." ' quality="high" bgcolor="#FFFFFF"
+                             width=100% height=200 name="chart" align="middle" allowScriptAccess="sameDomain"
+                             type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+                    </object>
 					<p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus <a href="#">dapibus semper urna</a>. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem.  Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>
 					<p class="links"><a href="#" class="more">Read More</a><a href="#" title="b0x" class="comments">Comments</a></p>
 				</div>
@@ -87,6 +88,7 @@ Released   : 20120902
 				<p class="meta"><span class="date">August 10, 2012</span><span class="posted">Posted by <a href="#">Someone</a></span></p>
 				<div style="clear: both;">&nbsp;</div>
 				<div class="entry">
+                    {% show_simple_graph "6" %}
 					<p>Sed lacus. Donec lectus. Nullam pretium nibh ut turpis. Nam bibendum. In nulla tortor, elementum vel, tempor at, varius non, purus. Mauris vitae nisl nec metus placerat consectetuer. Donec ipsum. Proin imperdiet est. Phasellus <a href="#">dapibus semper urna</a>. Pellentesque ornare, orci in consectetuer hendrerit, urna elit eleifend nunc, ut consectetuer nisl felis ac diam. Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem.  Mauris quam enim, molestie in, rhoncus ut, lobortis a, est.</p>
 					<p class="links"><a href="#" class="more">Read More</a><a href="#" title="b0x" class="comments">Comments</a></p>
 				</div>

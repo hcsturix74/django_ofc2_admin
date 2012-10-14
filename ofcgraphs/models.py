@@ -7,6 +7,7 @@ from django.db.models.fields.related import ForeignKey
 from django.db.models.fields import PositiveSmallIntegerField, CharField,\
     SlugField, TextField, IntegerField, FloatField,BooleanField
 from django.utils import simplejson
+from django.utils.safestring import mark_safe
 
 from django.core.validators import MaxValueValidator
 from ofcgraphs.managers import PublishedManager
@@ -20,7 +21,8 @@ import datetime
 GRAPH_TYPE_CHOICES = (( 'line','LINE'),
                       ( 'linedot','LINE-DOT'),
                       ( 'bar','BAR'),
-                      ( 'pie','PIE'),
+                      ( 'bar_3d','BAR-3D'),
+                      #( 'pie','PIE'),
                       #( 'hbar','HBAR'),
                       )
 
@@ -29,8 +31,33 @@ INSPECTION_DATE_CHOICES = (( 'next','next'),
                            ( 'previous','previous'),)
 
 SIZE_CHOICES = [(i,"%spx " % i)  for i in range(1,10)]
+DOT_STYLE_CHOICES = (( 'dot','DOT'),
+                      ( 'hollow-dot','HOLLOW-DOT'),
+                      ( 'solid-dot','SOLID-DOT'),
+                      ( 'star','STAR'),
+                      ( 'bow','BOW'),
+                      ( 'anchor','ANCHOR'),
+                    )
 
-DEBUG_EXAMPLE_VALUES= '15,18,19,14,17,18,15,18,17'
+#Two default values never changed...Till now
+DEFAULT_TITLE_STYLE   = '{font-size: 20px; color:#0000ff; font-family:Helvetica; text-align:center;}'
+DEFAULT_LEGEND_STYLE = '{color: #736AFF; font-size: 12px;}'
+
+#Not yet supported but to be inserted in future
+#EVENTS_LINE_ANIMATON_CHOICES = ( ( 'pop-up','POP-UP'),
+#                            ( 'explode','EXPLODE'),
+#                            ( 'mid-slide','MID-SLIDE'),
+#                            ( 'drop','DROP'),
+#                            ( 'fade-in','FADE-IN'),
+#                            ( 'shrink-in','SHRINK-IN'),
+#                        )
+
+
+
+
+
+
+
 
 
 class GenericBaseModel(models.Model):
@@ -149,9 +176,7 @@ class GraphTemplateCategory(BaseGraphTemplate):
 
 
 
-#Two default values never changed...Till now
-default_titlestyle   = '{font-size: 20px; color:"#0000ff"; font-family:Helvetica; text-align:center;}'
-default_legend_style ='{color: "#736AFF"; font-size: 12px;}'
+
 
 
 class GraphTemplate(BaseGraphTemplate):
@@ -180,13 +205,13 @@ class GraphTemplate(BaseGraphTemplate):
 
 
     title_text          = CharField(max_length=255, verbose_name = _('Title Text'), blank=True, null=True)
-    title_style         = CharField(max_length=255, verbose_name = _('Title Style'), blank=True, null=True ,default = default_titlestyle,
+    title_style         = CharField(max_length=255, verbose_name = _('Title Style'), blank=True, null=True ,default = DEFAULT_TITLE_STYLE,
                                     help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
-    x_legend_text       = CharField(max_length=255, verbose_name = _('X Legend Text'), blank=True, null=True)
-    x_legend_style      = CharField(max_length=255, verbose_name = _('X Legend Style'), blank=True, null=True, default = default_legend_style,
+    x_legend_text       = CharField(max_length=255, verbose_name = _('X Legend Text'))
+    x_legend_style      = CharField(max_length=255, verbose_name = _('X Legend Style'), blank=True, null=True, default = DEFAULT_LEGEND_STYLE,
                                     help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
-    y_legend_text       = CharField(max_length=255, verbose_name = _('Y Legend Text'), blank=True, null=True)
-    y_legend_style      = CharField(max_length=255, verbose_name = _('Y Legend Style'), blank=True, null=True, default = default_legend_style,
+    y_legend_text       = CharField(max_length=255, verbose_name = _('Y Legend Text'))
+    y_legend_style      = CharField(max_length=255, verbose_name = _('Y Legend Style'), blank=True, null=True, default = DEFAULT_LEGEND_STYLE,
                                     help_text=_('Use CSS style (example: {font-size: 30px;background-color: #0000ff;}'))
     bg_colour           = ColorField(verbose_name = _('Background Colour'),default = 'eeeeee')
     x_axis_stroke       = IntegerField(validators=[MaxValueValidator(20)], verbose_name = _('X Axis Stroke'), blank=True, null=True,choices=SIZE_CHOICES)
@@ -290,7 +315,7 @@ class GraphTemplate(BaseGraphTemplate):
         xleg['x_legend'] = dict()
         #Y legend
         if self.x_legend_text:      xleg['x_legend']['text']      = self.x_legend_text
-        if self.x_legend_style:     xleg['x_legend']['style']     = '%s' % self.x_legend_style
+        if self.x_legend_style:     xleg['x_legend']['style']     = self.x_legend_style
         return xleg
 
     def build_y_legend(self):
@@ -298,7 +323,7 @@ class GraphTemplate(BaseGraphTemplate):
         yleg['y_legend'] = dict()
         #Y legend
         if self.y_legend_text:      yleg['y_legend']['text']      = self.y_legend_text
-        if self.y_legend_style:     yleg['y_legend']['style']     = '%s' % self.y_legend_style
+        if self.y_legend_style:     yleg['y_legend']['style']     = self.y_legend_style
         return yleg
 
     def build_x_axis(self):
@@ -344,11 +369,11 @@ class GraphTemplate(BaseGraphTemplate):
             r_elements_list=[]
             for e in rel_elements:
                 el_obj_dict = e.build_obj_element()
-                print el_obj_dict
+                #print el_obj_dict
                 r_elements_list.append(el_obj_dict)
             obj['elements'] = r_elements_list
         except Exception:
-            print "None related"
+            print "No Elements related!"
         #set bg_colour
         if self.bg_colour:          obj['bg_colour']              = '#%s' % self.bg_colour
         #update dictionaries
@@ -407,7 +432,13 @@ class GraphElementTemplate(BaseGraphTemplate):
     dot_size           = PositiveSmallIntegerField(verbose_name = _('Dot Size'))
     tooltip            = CharField(max_length=100, verbose_name = _('Tooltip'), default= _('#val#'), help_text=_('Use some keywords like #val# Example: value:#val#'))
     inspection         = CharField(max_length=255, verbose_name = _('Ispect'),  choices=INSPECTION_DATE_CHOICES,default='self')
+    dot_style_type     = CharField(max_length=255, verbose_name = _('Dot-Style Type'), choices= DOT_STYLE_CHOICES, blank=True, null=True)
+    dot_style_dot_size = PositiveSmallIntegerField(verbose_name = _('Dot-Style Size'),blank=True, null=True)
+    dot_style_colour   = ColorField(verbose_name = _('Dot-Style Colour'), blank=True, null=True)
+    dot_style_halo_size= PositiveSmallIntegerField(verbose_name = _('Dot-Style Halo Size'), blank=True, null=True)
     graph_element_json = CharField(max_length=1024, verbose_name = _('Element JSON'), blank=True, null=True)
+
+
     values = []
 
     class Meta:
@@ -438,12 +469,30 @@ class GraphElementTemplate(BaseGraphTemplate):
         self.values = vl
 
 
+    def build_dot_style(self):
+        """
+        """
+        ds = dict()
+        ds['dot-style'] = dict()
+        if self.dot_style_type:  ds['dot-style']['type']= self.dot_style_type
+        if self.dot_style_dot_size:  ds['dot-style']['dot-size']= self.dot_style_dot_size
+        if self.dot_style_halo_size:  ds['dot-style']['halo-size']= self.dot_style_halo_size
+        if self.dot_style_colour:  ds['dot-style']['colour']= self.dot_style_colour
+        return ds
+
+
+
+
 
     def build_obj_element(self):
         obj = dict()
         obj['values']=[]
         if self.type:
-            obj['type'] = str(self.type)
+            t = self.type
+            if self.type == 'linedot':
+                t = 'line'
+            obj['type'] = t
+
             if self.tooltip:    obj['tip'] =  str(self.tooltip)
             if self.colour:     obj['colour']    = '#%s' % self.colour
             if self.alpha:      obj['alpha']    = self.alpha
@@ -451,7 +500,9 @@ class GraphElementTemplate(BaseGraphTemplate):
             if self.width:      obj['width']     = self.width
             if self.font_size:  obj['font-size'] = self.font_size
             if self.dot_size:   obj['dot-size']  = self.dot_size
-            
+            if self.type == 'linedot':
+                dst = self.build_dot_style()
+                obj.update(dst)
         if len(self.values)>0:
             obj['values']    = self.values
 
@@ -465,40 +516,7 @@ class GraphElementTemplate(BaseGraphTemplate):
         """
         obj = self.build_obj_element()
         return simplejson.dumps(obj)
-        
 
-#    def build_obj_dict(self):
-#        """
-#        This method creates the dict with attributes inserted
-#        """
-#        obj = dict()
-#        if self.type:
-#            if self.type == 'bar':
-#                #TODO: this value for alpha is hard-coded, bad practice!
-#                obj['alpha'] =  0.5
-#                obj.pop('width')
-#                obj.pop('dot-size')
-#            if self.type == 'linedot':
-#                #obj['dot-style']= { "type": "star", "dot-size": 7, "colour": "#DFC329" }
-#                obj['dot-style']= { 'type':'solid-dot','halo-size':1, 'dot-size':self.dot_size, 'colour': '#' + self.colour }
-#            obj['type'] = self.type
-#
-#
-#
-#        if self.colour:
-#            obj['colour']    = '#' + self.colour
-#        if self.text:
-#            obj['text']      = self.text
-#        if self.width:
-#            obj['width']     = self.width
-#        if self.font_size:
-#            obj['font-size'] = self.font_size
-#        if self.dot_size:
-#            obj['dot-size']  = self.dot_size
-#
-#        if self.tooltip:
-#            obj['tip'] =  {'tip': self.tooltip}
-#        return obj
 
 
 
