@@ -15,15 +15,16 @@ class GraphElementTemplateAdminInline(admin.StackedInline):
     """
     model = GraphElementTemplate
     max_num = 3
-    extra = 1
+    extra = 0
     fk_name = 'fk_graph_template'
     fieldsets = (
         (None, {
             'fields':(  ('name', 'slug','is_published',),
-                        ('type', 'colour', 'width'),
-                        ('font_size','dot_size',),
+                        ('type', 'colour', 'width', 'text',),
+                        ('font_size','dot_size','alpha',),
                         ('inspection','tooltip',),
                         ('dot_style_type', 'dot_style_dot_size', 'dot_style_colour', 'dot_style_halo_size'),
+
                      )
         }),
 
