@@ -424,9 +424,9 @@ class GraphElementTemplate(BaseGraphTemplate):
     """
     type               = CharField(max_length=255, verbose_name = _('Type'), choices=GRAPH_TYPE_CHOICES)
     fk_graph_template  = ForeignKey('GraphTemplate', related_name='graph_elements')
-    alpha              = FloatField(verbose_name = _('Alpha'), default = 0.5)
+    alpha              = FloatField(verbose_name = _('Alpha'), blank=True, null=True, default = 0.5)
     colour             = ColorField(verbose_name = _('Colour'), blank=True, null=True)
-    text               = CharField(max_length=255, verbose_name = _('Text'))
+    text               = CharField(max_length=255, verbose_name = _('Text'), blank=True, null=True)
     width              = PositiveSmallIntegerField(verbose_name = _('Width'))
     font_size          = PositiveSmallIntegerField(verbose_name = _('Font Size'))
     dot_size           = PositiveSmallIntegerField(verbose_name = _('Dot Size'))
@@ -478,6 +478,7 @@ class GraphElementTemplate(BaseGraphTemplate):
         if self.dot_style_dot_size:  ds['dot-style']['dot-size']= self.dot_style_dot_size
         if self.dot_style_halo_size:  ds['dot-style']['halo-size']= self.dot_style_halo_size
         if self.dot_style_colour:  ds['dot-style']['colour']= self.dot_style_colour
+        if self.tooltip:  ds['dot-style']['tip']= self.tooltip
         return ds
 
 
@@ -493,16 +494,19 @@ class GraphElementTemplate(BaseGraphTemplate):
                 t = 'line'
             obj['type'] = t
 
-            if self.tooltip:    obj['tip'] =  str(self.tooltip)
+
             if self.colour:     obj['colour']    = '#%s' % self.colour
             if self.alpha:      obj['alpha']    = self.alpha
             if self.text:       obj['text']      = str(self.text)
             if self.width:      obj['width']     = self.width
             if self.font_size:  obj['font-size'] = self.font_size
             if self.dot_size:   obj['dot-size']  = self.dot_size
-            if self.type == 'linedot':
+            if t == 'line':
                 dst = self.build_dot_style()
                 obj.update(dst)
+            else:
+                if self.tooltip:    obj['tip'] =  self.tooltip
+
         if len(self.values)>0:
             obj['values']    = self.values
 
