@@ -28,3 +28,11 @@ This is a complete project based on sqlite database
 python manage.py runserver
 
 
+ADMIN LOGIN:
+  username: admin
+  password: admin
+
+You can, of course, delete the DB (graphdb) and perform a syncdb:
+
+python manage.py syncdb
+
