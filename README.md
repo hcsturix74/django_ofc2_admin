@@ -47,27 +47,26 @@ This projects doen NOT support all the available graphs types provided by OFC2 l
 
 * Line graphs
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-1.png)
-
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-1.png)
 
 * 3D Bar graphs
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-2.png)
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-2.png)
 
 
 * Bar graphs
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-3.png)
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-3.png)
 
 
 * Multi graphs (bars + line)
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-4.png)
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-4.png)
 
 
 * Line Dot graphs (Hollow, solid, star...)
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-5.png)
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-5.png)
 
 
 Usage
@@ -131,4 +130,4 @@ Application Structure
 Here you can see tables structure (models.py class structure).
 For this I've used "modelviz.py" script whihch is part of django_extension application.
 
-![ScreenShot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/ofcgraphs_models.png)
+![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/ofcgraphs_models.png)
