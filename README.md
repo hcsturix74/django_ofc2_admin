@@ -43,30 +43,30 @@ Screenshots
 -----------------------
 
 Some screenshots are presented here to see the possible output graphs.
-This projects doen NOT support all the available graphs types provided by OFC2 library.
+This projects does NOT support all the available graph types provided by OFC2 library.
 
 * Line graphs
 
-![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-1.png)
+[![screenshot-1](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-1.png)]
 
 * 3D Bar graphs
 
-![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-2.png)
+[![screenshot-2](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-2.png)]
 
 
 * Bar graphs
 
-![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-3.png)
+[![screenshot-3](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-3.png)]
 
 
 * Multi graphs (bars + line)
 
-![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-4.png)
+[![screenshot-4](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-4.png)]
 
 
 * Line Dot graphs (Hollow, solid, star...)
 
-![screenshot](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-5.png)
+[![screenshot-5](https://github.com/hcsturix74/django_ofc2_admin/tree/master/screenshots/screenshot-5.png)]
 
 
 Usage
