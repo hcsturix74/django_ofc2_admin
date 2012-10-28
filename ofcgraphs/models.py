@@ -494,7 +494,6 @@ class GraphElementTemplate(BaseGraphTemplate):
                 t = 'line'
             obj['type'] = t
 
-
             if self.colour:     obj['colour']    = '#%s' % self.colour
             if self.alpha:      obj['alpha']    = self.alpha
             if self.text:       obj['text']      = str(self.text)
@@ -506,7 +505,6 @@ class GraphElementTemplate(BaseGraphTemplate):
                 obj.update(dst)
             else:
                 if self.tooltip:    obj['tip'] =  self.tooltip
-
         if len(self.values)>0:
             obj['values']    = self.values
 
@@ -523,15 +521,6 @@ class GraphElementTemplate(BaseGraphTemplate):
 
 
 
-
-    def to_json(self):
-        """
-        This method returns a json given a dict object
-        obj - the dict object to be passed
-        return - json object built from obj
-        """
-        obj = self.build_obj_element()
-        return simplejson.dumps(obj)
 
 
     def __unicode__(self):
