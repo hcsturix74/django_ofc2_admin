@@ -128,18 +128,20 @@ If you are using a django model for your data, alternatively you can create a Fo
 model in order to link it to a particular Graph Template.
 In this way, if you have different models for different measures (with numeric values stored)
 you can customize the graph for each.
-Example:
+
+* Example:
 
 ```python
 
     class MyDataModel(models.Model):
-        data_title       = models.CharField(max_length=255, verbose_name = _('Title'))
-        date             = models.DateField(verbose_name = _(u'Start Date'))
+        data_title       = models.CharField(max_length=255, verbose_name=_('Title'))
+        date             = models.DateField(verbose_name=_(u'Start Date'))
         value_1          = models.FloatField(verbose_name=_(u'Value 1'), blank=True, null=True)
         value_2          = models.FloatField(verbose_name=_(u'Value 2'), blank=True, null=True)
         ...
         #create here a ForignKey to your Graph Template
-        graph_template   = models.ForeignKey('GraphTemplate',verbose_name= _('Graph Template'), blank=True, null=True)
+        graph_template   = models.ForeignKey('GraphTemplate',verbose_name= _('Graph Template'), \
+                           blank=True, null=True)
 
         # Continue with your own model implementation
         ....
