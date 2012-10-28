@@ -36,7 +36,8 @@ You can, of course, delete the DB (graphdb) and perform a syncdb:
 
 python manage.py syncdb
 
-
+Some fixtures are present in ofcgraphs application for some Graph Templates demo
+Remove or override them if needed.
 
 
 Screenshots
@@ -74,6 +75,7 @@ Usage
 
 This django application just manages graph templates and elements (i.e. data type series) but does not provide
 a link to your physical data which could be stored in another table application or model.
+
 
 In views.py you can see a demo view which is something like:
 
@@ -122,12 +124,36 @@ It's quite simple:
 
 
 
+If you are using a django model for your data, alternatively you can create a ForeignKey in this
+model in order to link it to a particular Graph Template.
+In this way, if you have different models for different measures (with numeric values stored)
+you can customize the graph for each.
+Example:
+
+```python
+
+    class MyDataModel(models.Model):
+        data_title       = models.CharField(max_length=255, verbose_name = _('Title'))
+        date             = models.DateField(verbose_name = _(u'Start Date'))
+        value_1          = models.FloatField(verbose_name=_(u'Value 1'), blank=True, null=True)
+        value_2          = models.FloatField(verbose_name=_(u'Value 2'), blank=True, null=True)
+        ...
+        #create here a ForignKey to your Graph Template
+        graph_template   = models.ForeignKey('GraphTemplate',verbose_name= _('Graph Template'), blank=True, null=True)
+
+        # Continue with your own model implementation
+        ....
+```
+
+Of course you have to manage the data retrieval and graph creation in your application views.py using 
+the above example "get_graph_data(request, gobj_id)" as guideline.
+
 
 
 Application Structure
 -----------------------------------------
 
 Here you can see tables structure (models.py class structure).
-For this I've used "modelviz.py" script whihch is part of django_extension application.
+For this I've used "modelviz.py" script which is part of django_extension application.
 
 ![screenshot](https://raw.github.com/hcsturix74/django_ofc2_admin/master/screenshots/ofcgraphs_models.png)
