@@ -1,12 +1,4 @@
-__author__ = 'Luca'
-
-
-
-
-
-
-
-DEFAULT_OFC2_GRAPH_WIDTH  = '100%'
+DEFAULT_OFC2_GRAPH_WIDTH = '100%'
 
 DEFAULT_OFC2_GRAPH_HEIGHT = '400'
 

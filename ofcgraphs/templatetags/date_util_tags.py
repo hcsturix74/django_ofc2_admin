@@ -1,14 +1,10 @@
 from django import template
-
 from django.utils.safestring import mark_safe
-
-register = template.Library()
-
 import re
 
-from django import template
 
 register = template.Library()
+
 
 @register.simple_tag
 def format_date_range(from_date, to_date):
@@ -49,13 +45,13 @@ def render(self, context):
     except template.VariableDoesNotExist:
         return ''
 
-        start_format = ""
-        end_format = ""
-        if start_date.day == end_date.day:
-            end_format = self.format['day']
-        else:
-            start_format = self.format['day']
-            end_format = self.format['day']
+    start_format = ""
+    end_format = ""
+    if start_date.day == end_date.day:
+        end_format = self.format['day']
+    else:
+        start_format = self.format['day']
+        end_format = self.format['day']
 
     if start_date.month == end_date.month:
         end_format += " " + self.format['month']
@@ -68,9 +64,6 @@ def render(self, context):
     else:
         start_format += " " + self.format['year']
         end_format += " " + self.format['year']
-#    print start_format
-#    print end_format
-
     return start_date.strftime(start_format) + " - " + end_date.strftime(end_format)
 
 
